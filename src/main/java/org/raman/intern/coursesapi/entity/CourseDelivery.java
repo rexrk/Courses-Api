@@ -1,8 +1,6 @@
 package org.raman.intern.coursesapi.entity;
-
 import jakarta.persistence.*;
 import java.time.Year;
-
 @Entity
 public class CourseDelivery {
 
@@ -11,7 +9,7 @@ public class CourseDelivery {
     private Long CD_ID;
     private Year deliveryYear;
     private int semester;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "course_id", nullable = false)
     private Course course;
 
@@ -23,7 +21,6 @@ public class CourseDelivery {
     }
 
     public CourseDelivery() {
-
     }
 
     public Long getCD_ID() {
