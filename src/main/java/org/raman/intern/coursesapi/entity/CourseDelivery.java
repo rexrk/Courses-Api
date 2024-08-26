@@ -8,15 +8,15 @@ public class CourseDelivery {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Long CD_ID;
     private Year deliveryYear;
     private int semester;
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "course_id", nullable = false)
     private Course course;
 
-    public CourseDelivery(Long id, Year deliveryYear, int semester, Course course) {
-        this.id = id;
+    public CourseDelivery(Long CD_ID, Year deliveryYear, int semester, Course course) {
+        this.CD_ID = CD_ID;
         this.deliveryYear = deliveryYear;
         this.semester = semester;
         this.course = course;
@@ -26,12 +26,12 @@ public class CourseDelivery {
 
     }
 
-    public Long getId() {
-        return id;
+    public Long getCD_ID() {
+        return CD_ID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCD_ID(Long id) {
+        this.CD_ID = id;
     }
 
     public Year getDeliveryYear() {
@@ -61,7 +61,7 @@ public class CourseDelivery {
     @Override
     public String toString() {
         return "CourseDelivery{" +
-                "id=" + id +
+                "id=" + CD_ID +
                 ", deliveryYear=" + deliveryYear +
                 ", semester=" + semester +
                 ", course=" + course +
