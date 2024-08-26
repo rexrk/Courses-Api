@@ -19,8 +19,9 @@ public class CourseDeliveryService {
     }
 
     //5. Create a new instance of a course delivery
-    public void createDelivery(CourseDelivery delivery) {
+    public String createDelivery(CourseDelivery delivery) {
         courseDeliveryRepository.save(delivery);
+        return "Course delivery has been created";
     }
 
     //6. list of courses delivered in year YYYY=2020, and semester=1
@@ -41,10 +42,12 @@ public class CourseDeliveryService {
     }
 
     //8. Delete  an instance of a course ID = 8, delivered in YYYY=2022, and semester = 2
-    public void deleteDelivery(Long id, Year year, int semester) {
+    public String deleteDelivery(Long id, Year year, int semester) {
         Course course = courseService.getCourse(id);
         if(course != null) {
             courseDeliveryRepository.deleteByCourseAndDeliveryYearAndSemester(course, year, semester);
+            return "Course has been deleted";
         }
+        return null;
     }
 }

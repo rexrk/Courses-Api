@@ -14,19 +14,21 @@ public class CourseService {
         this.courseRepository = courseRepository;
     }
 
-    public void createCourse(Course course) {
+    public String createCourse(Course course) {
         courseRepository.save(course);
+        return "Course created";
     }
 
     public Course getCourse(Long id) {
         return courseRepository.findById(id).orElse(null);
     }
 
-    public List<Course> getCourses() {
+    public List<Course> getAllCourses() {
         return courseRepository.findAll();
     }
 
-    public void deleteCourse(Long id) {
+    public String deleteCourse(Long id) {
         courseRepository.deleteById(id);
+        return "Course deleted";
     }
 }
