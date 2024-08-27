@@ -1,0 +1,18 @@
+services:
+  app:
+    image: devraman/courses-api:latest
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+
+  frontend:
+    image: devraman/courses-ui:latest
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
