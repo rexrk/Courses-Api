@@ -79,7 +79,7 @@ public class CourseController {
     }
 
     //7.
-    @GetMapping("/instances/{year}/{semester}/{id}")
+    @GetMapping("/instances/{id}/{year}/{semester}")
     public ResponseEntity<CourseDelivery> getCourseDelivery(@PathVariable Year year, @PathVariable int semester, @PathVariable Long id) {
         CourseDelivery deliveryByIdAndYearAndSemester = courseDeliveryService.getDeliveryByIdAndYearAndSemester(id, year, semester);
         if(deliveryByIdAndYearAndSemester == null) {
