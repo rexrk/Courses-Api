@@ -1,9 +1,15 @@
-FROM openjdk:17-jdk-slim
+FROM maven:3.9.5-amazoncorretto-21-al2023 AS build
+WORKDIR /home/app
 
-WORKDIR /app
+COPY ./pom.xml /home/app/pom.xml
+COPY ./src /home/app/src
 
-COPY target/your-backend-app.jar app.jar
+RUN mvn -f /home/app/pom.xml clean package -DskipTests
 
+COPY . /home/app
+RUN mvn -f /home/app/pom.xml clean package -DskipTests
+
+FROM openjdk:21-jdk-slim
 EXPOSE 8080
-
-ENTRYPOINT ["java", "-jar", "app.jar"]
+COPY --from=build /home/app/target/*.jar app.jar
+ENTRYPOINT [ "sh", "-c", "java -jar /app.jar" ]
