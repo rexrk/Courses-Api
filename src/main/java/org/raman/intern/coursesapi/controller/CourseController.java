@@ -1,5 +1,4 @@
 package org.raman.intern.coursesapi.controller;
-
 import org.raman.intern.coursesapi.entity.Course;
 import org.raman.intern.coursesapi.entity.CourseDelivery;
 import org.raman.intern.coursesapi.service.CourseDeliveryService;
@@ -7,7 +6,6 @@ import org.raman.intern.coursesapi.service.CourseService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.Year;
 import java.util.List;
 
@@ -94,6 +92,15 @@ public class CourseController {
     @DeleteMapping("/instances/{year}/{semester}/{id}")
     public ResponseEntity<String> deleteCourseDelivery(@PathVariable Year year, @PathVariable int semester, @PathVariable Long id) {
         String deleted = courseDeliveryService.deleteDelivery(id, year, semester);
+        if(deleted.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(deleted, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/instances/{id}")
+    public ResponseEntity<String> deleteInstance(@PathVariable Long id) {
+        String deleted = courseDeliveryService.deleteDeliveryById(id);
         if(deleted.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

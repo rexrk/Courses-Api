@@ -50,4 +50,9 @@ public class CourseDeliveryService {
         }
         return null;
     }
+
+    public String deleteDeliveryById(Long id) {
+        courseDeliveryRepository.deleteById(id);
+        return "Course has been deleted";
+    }
 }
